@@ -1,29 +1,23 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { MovieCard } from "../components/MovieCard/MovieCard";
+import { useMovies } from "../hooks/useMovies";
+import "../App.css";
 
-export function Home() {
-  const [movies, setMovies] = useState([]);
+export const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const searchMovies = async (title) => {
-    const API_KEY = "b245b5eec30cb3ed84c8a9fc45cbe553";
-    const BASE_URL = "https://api.themoviedb.org/3";
+  const { movies, isLoading, error } = useMovies(searchQuery);
 
-    const url = title
-      ? `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${title}`
-      : `${BASE_URL}/movie/popular?api_key=${API_KEY}`;
+  const handleSearch = () => {
+    setSearchQuery(searchTerm);
+  };
 
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      setMovies(data.results);
-    } catch (error) {
-      console.error("Помилка:", error);
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
     }
   };
-  useEffect(() => {
-    searchMovies("");
-  }, []);
 
   return (
     <>
@@ -31,13 +25,14 @@ export function Home() {
         <p className="logo">CineVault</p>
         <div className="search-box">
           <input
-            placeholder="Search for movies"
+            type="text"
+            placeholder="Search movies..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={handleKeyDown}
           />
-          <button onClick={() => searchMovies(searchTerm)}>Search</button>
+          <button onClick={handleSearch}>Search</button>
         </div>
-
         <nav className="navigation-links">
           <ul>
             <li className="navigation-links-item">Movies</li>
@@ -57,36 +52,44 @@ export function Home() {
         </section>
 
         <section className="trending">
-          <h2>{searchTerm ? "Search Results" : "Trending Now"}</h2>
-          <div className="container">
-            {movies.length > 0 ? (
-              movies.map((movie) => (
-                <MovieCard
-                  key={movie.id}
-                  id={movie.id}
-                  name={movie.title}
-                  year={
-                    movie.release_date
-                      ? movie.release_date.split("-")[0]
-                      : "N/A"
-                  }
-                  rating={movie.vote_average}
-                  url={
-                    movie.poster_path
-                      ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                      : "https://placehold.co/200x300?text=No+Image"
-                  }
-                />
-              ))
-            ) : (
-              <div className="empty">
-                <h2>No movies found</h2>
-              </div>
-            )}
-          </div>
+          <h2>
+            {searchQuery ? `Results for "${searchQuery}"` : "Trending Now"}
+          </h2>
+
+          {/* 2. Обробка станів завантаження та помилки */}
+          {isLoading && <div className="loading">Loading movies...</div>}
+
+          {error && <div className="error">Error: {error}</div>}
+
+          {!isLoading && !error && (
+            <div className="container">
+              {movies.length > 0 ? (
+                movies.map((movie) => (
+                  <MovieCard
+                    key={movie.id}
+                    id={movie.id}
+                    name={movie.title}
+                    year={
+                      movie.release_date
+                        ? movie.release_date.split("-")[0]
+                        : "N/A"
+                    }
+                    rating={movie.vote_average}
+                    url={
+                      movie.poster_path
+                        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                        : "https://placehold.co/200x300?text=No+Image"
+                    }
+                  />
+                ))
+              ) : (
+                <div className="empty">No movies found</div>
+              )}
+            </div>
+          )}
         </section>
       </main>
       <footer></footer>
     </>
   );
-}
+};

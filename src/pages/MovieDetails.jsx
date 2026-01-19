@@ -6,7 +6,7 @@ export const MovieDetails = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
 
-  const API_KEY = "b245b5eec30cb3ed84c8a9fc45cbe553";
+  const API_KEY = import.meta.env.VITE_API_KEY;
 
   useEffect(() => {
     const fetchMovieDetails = async () => {

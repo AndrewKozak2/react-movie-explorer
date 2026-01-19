@@ -46,7 +46,7 @@
 
 .rating {
   font-size: 0.9rem;
-  color: #fbbf24; /* Золотий колір для зірочки */
+  color: #fbbf24;
   white-space: nowrap;
 }
 
@@ -54,12 +54,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: auto; /* Притискає низ до низу картки */
+  margin-top: auto;
   font-size: 0.9rem;
   color: #a3a3a3;
 }
 
-/* Базова кнопка */
 .btn {
   background: transparent;
   border: 1px solid #a3a3a3;
@@ -76,9 +75,8 @@
   border-color: white;
 }
 
-/* Активна кнопка (Liked) */
 .btnLiked {
-  composes: btn; /* Наслідує стилі .btn */
+  composes: btn;
   border-color: #ef4444;
   color: #ef4444;
   background: rgba(239, 68, 68, 0.1);
