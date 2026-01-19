@@ -1,0 +1,26 @@
+body {
+  background-color: #121212;
+  color: white;
+  font-family: sans-serif;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+ul {
+  display: flex;
+  list-style: none;
+  gap: 10px;
+  cursor: pointer;
+}

@@ -1,0 +1,85 @@
+.filmCard {
+  width: 250px;
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.filmCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.poster {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+}
+
+.movieInfo {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.rating {
+  font-size: 0.9rem;
+  color: #fbbf24; /* Золотий колір для зірочки */
+  white-space: nowrap;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto; /* Притискає низ до низу картки */
+  font-size: 0.9rem;
+  color: #a3a3a3;
+}
+
+/* Базова кнопка */
+.btn {
+  background: transparent;
+  border: 1px solid #a3a3a3;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+}
+
+.btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: white;
+}
+
+/* Активна кнопка (Liked) */
+.btnLiked {
+  composes: btn; /* Наслідує стилі .btn */
+  border-color: #ef4444;
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+}

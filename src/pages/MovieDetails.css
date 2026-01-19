@@ -1,0 +1,76 @@
+.movie-details-container {
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  color: #fff;
+}
+
+.back-btn {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #fbbf24;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.back-btn:hover {
+  text-decoration: underline;
+}
+
+.movie-content {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.detail-poster {
+  width: 350px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.detail-info {
+  flex: 1;
+}
+
+.detail-info h1 {
+  font-size: 3rem;
+  margin: 0 0 10px 0;
+  line-height: 1.1;
+}
+
+.tagline {
+  font-size: 1.2rem;
+  font-style: italic;
+  color: #a3a3a3;
+  margin-bottom: 20px;
+}
+
+.meta-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.genres {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.genre-tag {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+.overview {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #d4d4d4;
+  max-width: 800px;
+}
