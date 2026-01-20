@@ -7,6 +7,7 @@ export const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedGenre, setSelectedGenre] = useState(null);
+  const [page, setPage] = useState(1);
 
   const GENRES = [
     { id: null, name: "All" },
@@ -19,11 +20,13 @@ export const Home = () => {
   const { movies, isLoading, error } = useMovies({
     query: searchQuery,
     genreId: selectedGenre,
+    page: page,
   });
 
   const handleSearch = () => {
     setSearchQuery(searchTerm);
     setSelectedGenre(null);
+    setPage(1);
   };
 
   const handleKeyDown = (e) => {
@@ -36,6 +39,7 @@ export const Home = () => {
     setSelectedGenre(genreId);
     setSearchQuery("");
     setSearchTerm("");
+    setPage(1);
   };
 
   return (
@@ -116,6 +120,23 @@ export const Home = () => {
               ) : (
                 <div className="empty">No movies found</div>
               )}
+            </div>
+          )}
+          {!isLoading && !error && movies.length > 0 && (
+            <div className="pagination">
+              <button
+                className="page-btn"
+                disabled={page === 1}
+                onClick={() => setPage(page - 1)}
+              >
+                Prev
+              </button>
+
+              <span className="page-number">Page {page}</span>
+
+              <button className="page-btn" onClick={() => setPage(page + 1)}>
+                Next
+              </button>
             </div>
           )}
         </section>

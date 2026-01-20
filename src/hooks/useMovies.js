@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export const useMovies = ({query, genreId}) => {
+export const useMovies = ({ query, genreId, page }) => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -16,11 +16,11 @@ export const useMovies = ({query, genreId}) => {
       try {
         let url;
         if (query) {
-          url = `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}`;
+          url = `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}&page=${page}`;
         } else if (genreId) {
-          url = `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${genreId}`;
+          url = `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${genreId}&page=${page}`;
         } else {
-          url = `${BASE_URL}/movie/popular?api_key=${API_KEY}`;
+          url = `${BASE_URL}/movie/popular?api_key=${API_KEY}&page=${page}`;
         }
         const response = await fetch(url);
 
@@ -37,6 +37,6 @@ export const useMovies = ({query, genreId}) => {
     };
 
     fetchMovies();
-  }, [query, genreId]);
+  }, [query, genreId, page]);
   return { movies, isLoading, error };
 };
