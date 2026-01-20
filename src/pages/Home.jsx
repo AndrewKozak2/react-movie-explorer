@@ -6,17 +6,36 @@ import "../App.css";
 export const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedGenre, setSelectedGenre] = useState(null);
 
-  const { movies, isLoading, error } = useMovies(searchQuery);
+  const GENRES = [
+    { id: null, name: "All" },
+    { id: 28, name: "Action" },
+    { id: 35, name: "Comedy" },
+    { id: 27, name: "Horror" },
+    { id: 18, name: "Drama" },
+  ];
+
+  const { movies, isLoading, error } = useMovies({
+    query: searchQuery,
+    genreId: selectedGenre,
+  });
 
   const handleSearch = () => {
     setSearchQuery(searchTerm);
+    setSelectedGenre(null);
   };
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       handleSearch();
     }
+  };
+
+  const handleGenreClick = (genreId) => {
+    setSelectedGenre(genreId);
+    setSearchQuery("");
+    setSearchTerm("");
   };
 
   return (
@@ -55,6 +74,18 @@ export const Home = () => {
           <h2>
             {searchQuery ? `Results for "${searchQuery}"` : "Trending Now"}
           </h2>
+
+          <div className="genres-filter">
+            {GENRES.map((genre) => (
+              <button
+                key={genre.name}
+                className={`genre-btn ${selectedGenre === genre.id ? "active" : ""}`}
+                onClick={() => handleGenreClick(genre.id)}
+              >
+                {genre.name}
+              </button>
+            ))}
+          </div>
 
           {/* 2. Обробка станів завантаження та помилки */}
           {isLoading && <div className="loading">Loading movies...</div>}
