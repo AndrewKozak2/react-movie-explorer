@@ -27,8 +27,9 @@ export const MovieDetails = () => {
 
   return (
     <div className="movie-details-container">
+      {/* Кнопка повернення */}
       <Link to="/" className="back-btn">
-        Back to Home
+        ← Back to Home
       </Link>
       <div className="movie-content">
         <img
@@ -36,14 +37,21 @@ export const MovieDetails = () => {
           alt={movie.title}
           className="detail-poster"
         />
+
         <div className="detail-info">
-          <h1>{movie.title}</h1>
+          <h1 className="movie-title">{movie.title}</h1>
           <p className="tagline">{movie.tagline}</p>
+
           <div className="meta-row">
-            <span>{movie.release_date}</span>
-            <span>{movie.vote_average.toFixed(1)}</span>
-            <span>{movie.runtime}</span>
+            <span className="meta-item">
+              {movie.release_date.split("-")[0]}
+            </span>
+            <span className="meta-item rating">
+              {movie.vote_average.toFixed(1)}
+            </span>
+            <span className="meta-item">⏱ {movie.runtime} min</span>
           </div>
+
           <div className="genres">
             {movie.genres.map((genre) => (
               <span key={genre.id} className="genre-tag">
@@ -51,7 +59,8 @@ export const MovieDetails = () => {
               </span>
             ))}
           </div>
-          <h3>Overview</h3>
+
+          <h3 className="overview-title">Overview</h3>
           <p className="overview">{movie.overview}</p>
         </div>
       </div>

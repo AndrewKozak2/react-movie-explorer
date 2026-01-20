@@ -66,12 +66,16 @@ export const Home = () => {
 
       <main>
         <section className="hero">
-          <img
-            src="https://image.tmdb.org/t/p/original/8rpDcsfLJypbO6vREc05475qg9.jpg"
-            alt="Avatar"
-          />
-          <h1>Avatar: The Way of Water</h1>
-          <button className="hero-btn">Watch Now</button>
+          <div className="hero-content">
+            <h1>Avatar: The Way of Water</h1>
+            <p>
+              Jake Sully lives with his newfound family formed on the extrasolar
+              moon Pandora. Once a familiar threat returns to finish what was
+              previously started, Jake must work with Neytiri and the army of
+              the Na'vi race to protect their home.
+            </p>
+            <button className="hero-btn">Watch Trailer</button>
+          </div>
         </section>
 
         <section className="trending">
